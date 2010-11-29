@@ -47,7 +47,8 @@
 		onClosed: false,
 		overlayClose: true,		
 		escKey: true,
-		arrowKey: true
+		arrowKey: true,
+		subset: false
 	},
 	
 	// Abstracting the HTML and event identifiers for easy rebranding
@@ -483,6 +484,8 @@
 		if (!open) {
 			return;
 		}
+		
+		if(settings.subset) object = object.find(subset);
 		
 		var photo,
 		speed = settings.transition === "none" ? 0 : settings.speed;
