@@ -485,7 +485,7 @@
 			return;
 		}
 		
-		if(settings.subset) object = object.find(subset);
+		if(settings.subset) object = object.find(settings.subset);
 		
 		var photo,
 		speed = settings.transition === "none" ? 0 : settings.speed;
