@@ -485,7 +485,6 @@
 			return;
 		}
 		
-		if(settings.subset) object = object.find(settings.subset);
 		
 		var photo,
 		speed = settings.transition === "none" ? 0 : settings.speed;
@@ -727,6 +726,7 @@
 				img.src = href;
 			}, 1);	
 		} else if (href) {
+			if(settings.subset) href = href + ' ' + settings.subset;
 			$loadingBay.load(href, function (data, status, xhr) {
 				prep(status === 'error' ? 'Request unsuccessful: ' + xhr.statusText : $(this).children());
 			});
