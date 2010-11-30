@@ -47,8 +47,7 @@
 		onClosed: false,
 		overlayClose: true,		
 		escKey: true,
-		arrowKey: true,
-		subset: false
+		arrowKey: true
 	},
 	
 	// Abstracting the HTML and event identifiers for easy rebranding
@@ -726,7 +725,7 @@
 				img.src = href;
 			}, 1);	
 		} else if (href) {
-			if(settings.subset) href = href + ' ' + settings.subset;
+			if(href.indexOf('#')!==-1) href = href.replace('#', ' #');
 			$loadingBay.load(href, function (data, status, xhr) {
 				prep(status === 'error' ? 'Request unsuccessful: ' + xhr.statusText : $(this).children());
 			});
