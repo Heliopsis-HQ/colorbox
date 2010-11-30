@@ -104,6 +104,7 @@
 	publicMethod,
 	boxElement = prefix + 'Element';
 	
+	
 	// ****************
 	// HELPER FUNCTIONS
 	// ****************
@@ -725,9 +726,15 @@
 				img.src = href;
 			}, 1);	
 		} else if (href) {
-			if(href.indexOf('#')!==-1) href = href.replace('#', ' #');
-			$loadingBay.load(href, function (data, status, xhr) {
-				prep(status === 'error' ? 'Request unsuccessful: ' + xhr.statusText : $(this).children());
+			var sharpPos = href.indexOf('#')
+			if(sharpPos!==-1) {
+				var subset = href.substr(sharpPos);
+				href = href.substr(0, sharpPos);
+			}
+			$.get(href, {}, function (data, status, xhr) {
+				var $data = $.browser.msie ? $(innerShiv(data, false)) : $(data);
+				$loadingBay.empty().append(subset ? $data.find(subset) : $data);
+				prep(status === 'error' ? 'Request unsuccessful: ' + xhr.statusText : $loadingBay.children());
 			});
 		}
 	};
